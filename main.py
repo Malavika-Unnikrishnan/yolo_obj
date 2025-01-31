@@ -26,6 +26,12 @@ def get_position_and_command(x, frame_width):
     else:
         return "Center", "Stop and assess"
 
+# Root endpoint to check if the API is running
+@app.get("/")
+def home():
+    return {"message": "FastAPI backend is running!"}
+
+# Object detection endpoint
 @app.post("/detect", response_model=List[DetectionResult])
 async def detect_objects(file: UploadFile = File(...)):
     # Convert uploaded file to an OpenCV image
